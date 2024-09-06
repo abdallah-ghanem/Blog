@@ -33,5 +33,29 @@ class PostControl extends Controller
     public function create(){
         return view('posts.create');
     }
+    public function store(){
+        //1-get the data from user
+        /* $data=$_POST;
+        return $data; */
+        /* $request=request();
+        dd($request->title,$request->all());//dd puse excution by this line and show the intern
+        dd($request);//to show all methods intier this object */
+        $data=request()->all();
+        /* return $data; */
+        $title=request()->title;//to spilit or show on of them and title that name taken from html code from name
+        /* dd($data,$title); */
+
+        //2-store data from user to database
+
+
+        //3-then redirection to posts.index
+        return to_route(route:'articals.index');//redirection to posts.index
+        //view('posts.store');
+    }
+
+    public function edit(){
+
+        return view('posts.edit');
+    }
 
 }

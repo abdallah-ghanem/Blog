@@ -31,8 +31,12 @@ Route::get('/articals/{post}/hfjdgj/dfjgj/stutru/trs',[PostControl::class,'show'
 //2- define controllers that reder the view (new public function)
 //3- define the view that contain list of posts (new page for brwser)
 //4- remove any static html data from view ($varible)
-Route::get('/test/edit',function(){return 'test';});
+/* Route::get('/test/edit',function(){return 'test';}); */
 
-Route::get('/articals/create',[PostControl::class,'create'])->name(name:'posts.create');
+Route::get('/articals/create/',[PostControl::class,'create'])->name(name:'posts.create');
 //1- define route so user can access from brwoser
 //3- define the view that contain list of posts (new page for brwser)
+Route::Post('/articals',[PostControl::class,'store'])->name(name:'posts.store');
+
+Route::get('/articals/{post}/edit',[PostControl::class,'edit'])->name(name:'posts.edit');
+

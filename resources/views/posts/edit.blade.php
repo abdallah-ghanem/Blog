@@ -1,9 +1,11 @@
 @extends('layouts.app') {{-- take data or code from this file and directions --}} {{-- to make comman page because when i want change anything from html comman --}}
 
-@section('title')Create @endsection
+@section('title')Edit @endsection
+
 @section('content')
 
-<form method="POST" action="{{route('posts.store')}}">
+
+<form >
     @csrf {{-- this protect from varnalbility and make secure so any form must contain csrf --}}
 <div class="container mt-5">
     <div
@@ -60,11 +62,12 @@
           <option value="1">Abdallah</option>
           <option value="2">Ghanem</option>
         </select>
-        <button type="submit" class="btn btn-success mt-4">Submit</button>
+        <button type="submit" class="btn btn-primary mt-4">Update</button>
       </div>
     </div>
 </form>
   </div>
+
 
 
 @endsection
