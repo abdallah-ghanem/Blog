@@ -40,3 +40,4 @@ Route::Post('/articals',[PostControl::class,'store'])->name(name:'posts.store');
 
 Route::get('/articals/{post}/edit',[PostControl::class,'edit'])->name(name:'posts.edit');
 
+Route::put('/photos/{photo}',[PostControl::class,'update'])->name(name:'posts.update');

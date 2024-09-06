@@ -5,9 +5,10 @@
 @section('content')
 
 
-<form >
+<form method="POST" action="{{route('posts.update',1)}}"> {{-- form element understand only get and post --}}
     @csrf {{-- this protect from varnalbility and make secure so any form must contain csrf --}}
-<div class="container mt-5">
+    @method('PUT')   {{-- to make form understand other methods like put delet and pash you should write this --}}
+    <div class="container mt-5">
     <div
  class="row justify-content-center">
       <div class="col-md-10">
