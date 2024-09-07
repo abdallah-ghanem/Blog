@@ -13,18 +13,19 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
-            <th scope="col">Posted by</th>
+            <th scope="col">Description</th>
             <th scope="col">Created at</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
+            {{-- @dd($posts); --}}
             @foreach ($posts as $p){{-- p hier is a variable i made it to store data from postes --}}
             <tr>
-                <td>{{$p['id']}}</td>
-                <td>{{$p['Title']}}</td>
-                <td>{{$p['Posted by']}}</td>
-                <td>{{$p['Created at']}}</td>
+                <td>{{$p->id}}</td> {{-- both method accept -> or [''] in laravel--}}
+                <td>{{$p->title}}</td>
+                <td>{{$p['description']}}</td>
+                <td>{{$p['created_at']}}</td>
                 <td>
                     <a href="{{ route('posts.show', $p['id']) }}"  class="btn btn-primary">View</a>
                     <a href="{{ route('posts.edit', $p['id']) }}"  class="btn btn-secondary">Edit</a>

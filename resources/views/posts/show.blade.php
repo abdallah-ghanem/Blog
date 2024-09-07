@@ -15,8 +15,8 @@
           Post Info
         </div>
         <div class="card-body">
-        <h5 class="card-title">Title:{{$post['Title']}}</h5>
-        <p class="card-text">Description:{{$post['Description']}}</p>
+        <h5 class="card-title">Title:{{$post->title}}</h5>
+        <p class="card-text">Description:{{$post['description']}}</p>
 
         </div>
       </div>
@@ -29,7 +29,7 @@
         <div class="card-body">
           <blockquote class="blockquote mb-0">
             <p>Created by {{$post['Posted by']}}</p>
-            <footer class="blockquote-footer">Email:abdallah21basemen@gmail.com <cite title="Source Title">Created at:{{$post['Created at']}}</cite></footer>
+            <footer class="blockquote-footer">Email:abdallah21basemen@gmail.com <cite title="Source Title">Created at:{{$post['created_at']}}</cite></footer>
           </blockquote>
         </div>
       </div>
