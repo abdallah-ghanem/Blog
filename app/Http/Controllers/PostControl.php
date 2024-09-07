@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\post;//to get file excute here this post use down in public function the first word
+use App\Models\User;
+
 
 class PostControl extends Controller
 {
     public function index()
     {
         //the next command considered collectio object contain objects
-        $postsFromDB=post::all();//not for me to write but from DB directly
+        $postsFromDB=post::all();//not for me to write but from DB directly //This line of code retrieves all records from the posts table in your database and stores them in the $postsFromDB variable.
         /* dd($postsFromDB); */
         //we need to create table in database
         //id,title,description,created at
@@ -46,9 +48,11 @@ class PostControl extends Controller
 }
 
     public function create(){
-        return view('posts.create');
+        $users=User::all();//from file called youser located at app models get data from him
+        return view('posts.create',['users'=>$users]);//practical inside user to pass variable call method to file .blade.php
     }
     public function store(){
+
         //1-get the data from user
         /* $data=$_POST;
         return $data; */
@@ -58,43 +62,65 @@ class PostControl extends Controller
         $data=request()->all();
         /* return $data; */
         $title=request()->title;//to spilit or show on of them and title that name taken from html code from name
+        $description=request()->description;
         /* dd($data,$title); */
 
         //2-store data from user to database
+        //First method to store data in DB
+        /* $post = new post;//excute new colume in DB called post
 
+        $post->title = $title;
+        $post->description = $description;
+
+        $post->save(); */
+
+        $post=Post::create([//secound method to store data in DB
+            'title'=>$title,
+            'description'=>$description
+        ]);
 
         //3-then redirection to posts.index
         return to_route(route:'articals.index');//redirection to posts.index
         //view('posts.store');
     }
 
-    public function edit(){
+    public function edit(Post $post){//to get information from DBs
+        $users=User::all();
 
-        return view('posts.edit');
-    }
+        return view('posts.edit',['users'=>$users ,'post'=>$post]);//to make create post dynamic
+    }//then pass this data to view page (user and post)
 
-    public function update(){
+    public function update($postId){
+        //dd($postId);
     //1-get the data from user
     $title=request()->title;
     $description=request()->description;
-    $id=request()->creator_id;
+    //$id=request()->creator_id;
     /* dd($title,$description,$id); */
 
     //2-update data from user to database
-
+    $singlePostFromDB=post::find($postId);//find the post
+    $singlePostFromDB->update([
+        'title'=>$title,
+        'description'=>$description,
+        ]);
+    /* dd($singlePostFromDB); */
+//update the post data
     //3-then redirection to posts.show
-    return to_route(route:'posts.show', parameters:1);
+    return to_route('posts.show', $postId);
         /* return view('posts.edit'); */
     }
 
-    public function destroy(){
+    public function destroy($postId){
         //1-delet form from database
-
-
-
+         //-get the data from user
+        $allPostFromDB=post::find($postId);
+         //-delete data from user to database
+        $allPostFromDB->delete();
 
         //2-then redirection to posts.index
         return to_route(route:'articals.index');//after delet form go to the main page with this post
+
     }
 
 }

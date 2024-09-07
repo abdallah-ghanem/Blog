@@ -56,9 +56,13 @@
       <div class="col-md-4">
         <h6>Post Creator</h6>
         <select class="form-select" name="creator_id" aria-label="Default select example">
-          <option selected>Open to select</option>
-          <option value="1">Abdallah</option>
-          <option value="2">Ghanem</option>
+            <option selected>Open to select</option>
+            @foreach ($users as $user)
+            <option value="{{$user->id}}">{{$user->name}}</option>
+            @endforeach
+
+
+
         </select>
         <button type="submit" class="btn btn-success mt-4">Submit</button>
       </div>
