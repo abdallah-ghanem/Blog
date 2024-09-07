@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\post;//to get file excute here
+use App\Models\post;//to get file excute here this post use down in public function the first word
 
 class PostControl extends Controller
 {
@@ -24,10 +24,11 @@ class PostControl extends Controller
 
     }
 
-    public function show($postId){
+    public function show(post $post){//type hinting that make you saving to write code where that the first Post is type of operation
         //create dynamic data
         //select * from postswhere id =$postId
-        $singlePostFromDB=post::find($postId);//small object or model object
+        //$singlePostFromDB=post::find($postId);
+        //$singlePostFromDB=post::findOrFail($postId);//small object or model object
         /* $singlePostFromDB=post::where('id',$postId)->first();//model object to get first value
         $singlePostFromDB=post::where('id',$postId)->get();//collection object to get all value */
         /* $singlePoste=[//static data
@@ -37,8 +38,11 @@ class PostControl extends Controller
             ['id'=>4 ,'Title'=>'python','Description'=> 'THIS is Test Description','Posted by'=>'Abdallah','Created at'=>'2024-09-01']
         ];
         */
+        /* if(is_null($singlePostFromDB)){//use this or findOrFail
+            return to_route(route:'articals.index');
+        } */
 
-    return view('posts.show',['post'=>$singlePostFromDB]);
+    return view('posts.show',['post'=>$post]);
 }
 
     public function create(){
