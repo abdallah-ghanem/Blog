@@ -8,6 +8,8 @@ class PostControl extends Controller
 {
     public function index()
     {
+        //we need to create table in database
+        //id,title,description,created at
         $allPostes=[
             ['id'=>1 ,'Title'=>'php','Posted by'=>'Abdallah','Created at'=>'2024-09-01'],
             ['id'=>2 ,'Title'=>'C++','Posted by'=>'Abdallah','Created at'=>'2024-08-01'],
@@ -70,6 +72,16 @@ class PostControl extends Controller
     //3-then redirection to posts.show
     return to_route(route:'posts.show', parameters:1);
         /* return view('posts.edit'); */
+    }
+
+    public function destroy(){
+        //1-delet form from database
+
+
+
+
+        //2-then redirection to posts.index
+        return to_route(route:'articals.index');//after delet form go to the main page with this post
     }
 
 }

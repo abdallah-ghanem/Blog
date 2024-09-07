@@ -40,4 +40,11 @@ Route::Post('/articals',[PostControl::class,'store'])->name(name:'posts.store');
 
 Route::get('/articals/{post}/edit',[PostControl::class,'edit'])->name(name:'posts.edit');
 
-Route::put('/photos/{photo}',[PostControl::class,'update'])->name(name:'posts.update');
+Route::put('/articals/{photo}',[PostControl::class,'update'])->name(name:'posts.update');
+
+Route::delete('/articals/{photo}',[PostControl::class,'destroy'])->name(name:'posts.destroy');
+
+
+//1-structure change of database(creat table,edit colum,remove colum)
+//2-operation on database(insert record,delet record,edit record)
+//the previos lines mean that only do 2 operation on database change structure or operation
