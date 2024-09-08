@@ -26,6 +26,7 @@ class PostControl extends Controller
 
     }
 
+
     public function show(post $post){//type hinting that make you saving to write code where that the first Post is type of operation
         //create dynamic data
         //select * from postswhere id =$postId
@@ -43,16 +44,17 @@ class PostControl extends Controller
         /* if(is_null($singlePostFromDB)){//use this or findOrFail
             return to_route(route:'articals.index');
         } */
-
     return view('posts.show',['post'=>$post]);
 }
+
 
     public function create(){
         $users=User::all();//from file called youser located at app models get data from him
         return view('posts.create',['users'=>$users]);//practical inside user to pass variable call method to file .blade.php
     }
-    public function store(){
 
+
+    public function store(){
         //1-get the data from user
         /* $data=$_POST;
         return $data; */
@@ -60,9 +62,13 @@ class PostControl extends Controller
         dd($request->title,$request->all());//dd puse excution by this line and show the intern
         dd($request);//to show all methods intier this object */
         $data=request()->all();
+        //dd($data);
         /* return $data; */
+
+        //this block to call data from .blade.php
         $title=request()->title;//to spilit or show on of them and title that name taken from html code from name
         $description=request()->description;
+        $creator=request()->creator_id;//take this variable from name of object or buttom .blade.php
         /* dd($data,$title); */
 
         //2-store data from user to database
@@ -76,26 +82,26 @@ class PostControl extends Controller
 
         $post=Post::create([//secound method to store data in DB
             'title'=>$title,
-            'description'=>$description
+            'description'=>$description,
+            'user_id'=>$creator,
         ]);
-
         //3-then redirection to posts.index
-        return to_route(route:'articals.index');//redirection to posts.index
+        return to_route('articals.index');//redirection to posts.index
         //view('posts.store');
     }
 
     public function edit(Post $post){//to get information from DBs
         $users=User::all();
-
         return view('posts.edit',['users'=>$users ,'post'=>$post]);//to make create post dynamic
     }//then pass this data to view page (user and post)
+
 
     public function update($postId){
         //dd($postId);
     //1-get the data from user
     $title=request()->title;
     $description=request()->description;
-    //$id=request()->creator_id;
+    $id=request()->creator_id;
     /* dd($title,$description,$id); */
 
     //2-update data from user to database
@@ -103,13 +109,15 @@ class PostControl extends Controller
     $singlePostFromDB->update([
         'title'=>$title,
         'description'=>$description,
+        'user_id'=>$id,//the name in left from DB and name in right from variable above and get it from file .blade.php
         ]);
     /* dd($singlePostFromDB); */
-//update the post data
+    //update the post data
     //3-then redirection to posts.show
     return to_route('posts.show', $postId);
         /* return view('posts.edit'); */
     }
+
 
     public function destroy($postId){
         //1-delet form from database
@@ -117,10 +125,8 @@ class PostControl extends Controller
         $allPostFromDB=post::find($postId);
          //-delete data from user to database
         $allPostFromDB->delete();
-
         //2-then redirection to posts.index
         return to_route(route:'articals.index');//after delet form go to the main page with this post
-
     }
 
 }
