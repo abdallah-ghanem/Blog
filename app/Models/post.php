@@ -12,4 +12,7 @@ class post extends Model
     public function user(){//this function use to connect between to files user and post
         return $this->belongsTo(related:user::class);
     }
+    public function postCreator(){//this code if I instead user() by postCreator
+        return $this->belongsTo(related:user::class,forigrnKey:'user_id');
+    }
 }

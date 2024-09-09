@@ -55,6 +55,13 @@ class PostControl extends Controller
 
 
     public function store(){
+//write code to validate the data
+request()->validate([//to make validate make use must add value to title abd description and make min for charater
+    'title'=>['required','min:3'],
+    'description'=>['required','min:15'],
+    'creator_id'=>['required','exists:users,id'],//this code to check id if he exist in file users or not if exist search it in row id
+]);
+
         //1-get the data from user
         /* $data=$_POST;
         return $data; */
@@ -97,6 +104,14 @@ class PostControl extends Controller
 
 
     public function update($postId){
+//validate error in update data
+request()->validate([//to make validate make use must add value to title abd description and make min for charater
+    'title'=>['required','min:3'],
+    'description'=>['required','min:15'],
+    'creator_id'=>['required','exists:users,id'],//this code to check id if he exist in file users or not if exist search it in row id
+]);
+
+
         //dd($postId);
     //1-get the data from user
     $title=request()->title;

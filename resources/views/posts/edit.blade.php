@@ -4,6 +4,18 @@
 
 @section('content')
 
+
+@if ($errors->any())  {{-- this use to show for user the validate rule --}}
+    <div class="alert alert-danger text-center">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 {{-- we make all static data in this page to dynamic --}}
 <form method="POST" action="{{route('posts.update',$post->id)}}"> {{-- form element understand only get and post --}}
     @csrf {{-- this protect from varnalbility and make secure so any form must contain csrf --}}
@@ -61,7 +73,7 @@
         <select class="form-select" name="creator_id" aria-label="Default select example">
           <option selected>Open to select</option>
           @foreach ($users as $user)
-            <option value="{{$user->id}}">{{$user->name}}</option>
+            <option @if($user->id == $post->user_id) selected @endif value="{{$user->id}}">{{$user->name}}</option> {{-- if statment here to make id created show in bar not choice open to select --}} {{-- or use @selected($user->id == $post->user_id) --}} {{-- or instead one to two in selected --}}
             @endforeach
         </select>
         <button type="submit" class="btn btn-primary mt-4">Update</button>

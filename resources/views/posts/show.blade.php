@@ -28,8 +28,8 @@
         </div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
-            <p>Created by {{$post->user->name}}</p>{{-- //to get information from user from function we write it to connect between post and user --}}
-            <footer class="blockquote-footer">{{$post->user->email}} <cite title="Source Title">Created at:{{$post['created_at']}}</cite></footer>
+            <p>Created by {{$post->user ? $post->user->name : 'Not Found'}}</p>{{-- //to get information from user from function we write it to connect between post and user --}}
+            <footer class="blockquote-footer">{{$post->user ? $post->user->email :'Mot Found'}} <cite title="Source Title">Created at:{{$post['created_at']}}</cite></footer>
           </blockquote>
         </div>
       </div>

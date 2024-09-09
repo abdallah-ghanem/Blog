@@ -15,7 +15,7 @@
             <th scope="col">Title</th>
             <th scope="col">Description</th>
             <th scope="col">Created at</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Posted by</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +26,7 @@
                 <td>{{$p->title}}</td>
                 <td>{{$p['description']}}</td>
                 <td>{{$p['created_at']}}</td>
+                <td>{{$p->user->name}}</td>
                 <td>
                     <a href="{{ route('posts.show', $p['id']) }}"  class="btn btn-primary">View</a>
                     <a href="{{ route('posts.edit', $p['id']) }}"  class="btn btn-secondary">Edit</a>
